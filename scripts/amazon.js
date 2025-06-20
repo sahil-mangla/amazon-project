@@ -1,3 +1,5 @@
+import {cart as myCart} from '../data/cart.js'; //dot to get out of file and folder then path
+//import always at top of file
 
 let productsHTML = '';
 

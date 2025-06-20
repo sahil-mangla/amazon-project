@@ -1,4 +1,4 @@
-import {cart} from '../data/cart.js'; //dot to get out of file and folder then path
+import {cart, addToCart} from '../data/cart.js'; //dot to get out of file and folder then path
 import {products} from '../data/products.js';
 
 //import always at top of file
@@ -63,40 +63,25 @@ products.forEach((product) => {
 const productGrid = document.querySelector('.js-products-grid');
 productGrid.innerHTML = productsHTML;
 
-document.querySelectorAll('.js-add-to-cart')
-.forEach((button)=>{
-    button.addEventListener('click', () => {
-          const productId = button.dataset.productId;
-          
-            let matchingItem;
-        //looping through cart
-        cart.forEach((item)=>{
-            if(productId === item.productId){
-                matchingItem = item;
-            }
-        })
+    function updateCartQuantity(){
+        let cartQuantity = 0;
 
-        if(matchingItem){
-            matchingItem.quantity += 1;
-        } else{
-
-          cart.push({
-            productId: productId,
-            quantity: 1,
-          });
-
-          let cartQuantity = 0;
-
-          cart.forEach((item)=>{
-            cartQuantity += item.quantity;
+          cart.forEach((cartItem)=>{
+            cartQuantity += cartItem.quantity;
           })
         
         
         document.querySelector('.js-cart-quantity')
         .innerHTML = cartQuantity;
-        }
+    }
 
 
-
+document.querySelectorAll('.js-add-to-cart')
+.forEach((button)=>{
+    button.addEventListener('click', () => {
+          const productId = button.dataset.productId;
+          
+        addToCart(productId);
+        updateCartQuantity();
     });
 });

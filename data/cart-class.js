@@ -1,17 +1,19 @@
 
 class Cart {
+    //PUblic property
     cartItems; //same as below
-    localStorageKey = undefined;
+    //made it private (Private key: #)
+    #localStorageKey = undefined;
 
     //run this constuctor automatically when object is generated
     //never return anything from constructor
     constructor(localStorageKey){    
-        this.localStorageKey = localStorageKey;
-        this.loadFromStorage();
+        this.#localStorageKey = localStorageKey;
+        this.#loadFromStorage();
     }
 
-     loadFromStorage = function(){
-            this.cartItems = JSON.parse(localStorage.getItem(this.localStorageKey)); 
+     #loadFromStorage(){
+            this.cartItems = JSON.parse(localStorage.getItem(this.#localStorageKey)); 
             
             if(!this.cartItems){
                 this.cartItems = [{
@@ -26,8 +28,8 @@ class Cart {
             }
     }
 
-    saveToStorage = function(){
-            localStorage.setItem(this.localStorageKey,JSON.stringify(this.cartItems));
+    saveToStorage(){
+            localStorage.setItem(this.#localStorageKey,JSON.stringify(this.cartItems));
     }
 
 
@@ -87,6 +89,8 @@ class Cart {
 
 const cart = new Cart('cart-oop');
 const businessCart = new Cart('cart-business');
+
+//cart.#localStorageKey = 'test' error throww
 
 console.log(cart);
 console.log(businessCart);

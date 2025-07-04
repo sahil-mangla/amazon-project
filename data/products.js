@@ -122,6 +122,9 @@ const promise = fetch(
   });
 
   console.log('Load products');
+  }).catch((error)=>{
+    console.log('Unexpected error. Please try again later.');
+    ///'https://error.supersimplebackend.dev/products'
   })
 
   return promise;
@@ -149,6 +152,11 @@ export function loadProducts(func){
   func();
   
   });
+
+  xhr.addEventListener('error',(error)=>{
+    console.log('Unexpected error. Please try again later.');
+    
+  })
 
   xhr.open('GET','https://supersimplebackend.dev/products');
   xhr.send();

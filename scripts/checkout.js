@@ -13,18 +13,31 @@ import { loadCart } from "../data/cart.js";
 
 async function loadPage(){
     
-    //await can only be used in async function
-    await loadProductsFetch();
+    
+    try{
+        // throw 'error1';
 
-    await new Promise((resolve)=>{
+        await loadProductsFetch();
+
+    await new Promise((resolve, reject)=>{
+        // throw 'error2'; 
+        //throw doesnt work in future reject does
         loadCart(()=>{
+            // reject('error3')
             resolve(); //load cart
         });
+    });
+
+    } catch(error) {
+        console.log('Unexpected error. Please try again later.');
+    }
+    
+    //await can only be used in async function
 
     renderOrderSummary(); 
     renderPaymentSummary();
 
-    });
+    
 
 }
 loadPage();

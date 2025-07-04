@@ -1,17 +1,12 @@
 import { renderOrderSummary } from "./checkout/orderSummary.js";
 import { renderPaymentSummary } from "./checkout/paymentSummary.js";
-import { loadProducts } from "../data/products.js";
+import { loadProductsFetch } from "../data/products.js";
 import { loadCart } from "../data/cart.js";
 // import '../data/backend-practise.js'
 // import '../data/cart-class.js';
 
 Promise.all([
-    new Promise((resolve)=>{
-    //runs the inner function immediatelty 
-    loadProducts(()=>{
-        resolve('value1'); //load products
-    });
-}),
+    loadProductsFetch(),
 
 new Promise((resolve)=>{
         loadCart(()=>{

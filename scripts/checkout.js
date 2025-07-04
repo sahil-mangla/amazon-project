@@ -5,21 +5,53 @@ import { loadCart } from "../data/cart.js";
 // import '../data/backend-practise.js'
 // import '../data/cart-class.js';
 
-Promise.all([
-    loadProductsFetch(),
+/* async await 
+    shourtcut for promises
+    let us wirte asynchronus code like normal code
+*/
 
-new Promise((resolve)=>{
+
+async function loadPage(){
+    
+    //await can only be used in async function
+    await loadProductsFetch();
+
+    await new Promise((resolve)=>{
         loadCart(()=>{
             resolve(); //load cart
         });
-})
 
-]).then((values)=>{
-    console.log(values);
-    
     renderOrderSummary(); 
     renderPaymentSummary();
-});
+
+    });
+
+}
+loadPage();
+
+
+
+
+
+// Promise.all([
+//     loadProductsFetch(),
+
+// new Promise((resolve)=>{
+//         loadCart(()=>{
+//             resolve(); //load cart
+//         });
+// })
+
+// ]).then((values)=>{
+//     console.log(values);
+    
+//     renderOrderSummary(); 
+//     renderPaymentSummary();
+// });
+
+
+
+
 
 /*
 new Promise((resolve)=>{
